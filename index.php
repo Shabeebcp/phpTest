@@ -67,5 +67,13 @@ include_once 'controller.php'
 	</div>
 	</center>
 
+
+	<!---Fetch Data By Select Query -->
+	<form action="" method="POST">	
+	<button name="btnSelect"  class="btnSelect"> Select Data  </button>
+	</form>
+
+	<button name="PageTwo"  class="page2"> <a href="pageOne.php"> PageTwo</a>  </button>
+
 </body>
 </html>

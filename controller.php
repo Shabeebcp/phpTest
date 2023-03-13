@@ -12,7 +12,6 @@ function InsertValues($conn){
 
 	if(mysqli_query($conn,$sql)){
 	echo 	'<script>alert("New record created successfully !")</script>';
-
 	} else {
 		echo "Error: " . $sql . "
 		" . mysqli_error($conn);
@@ -39,4 +38,37 @@ if(isset($_POST['submit'])){
 }
 ///[-----------------------------------------------------------------------------------------]
 
+//[--------Fetch Data By Select Query---------------------------------------------------------]
+if(isset($_POST['btnSelect'])){
+	$sql = "Select * from tblUser";
+	$result = $conn->query($sql);
+	if($result->num_rows>0){
+		echo "<table><tr><td>StudentName</td><td>Password</td></tr>";
+		while($rows = $result->fetch_assoc()){
+			echo "<tr><td>".$rows["StudentName"]."</td><td>".$rows["Password"]."</td></tr>";			
+
+		}
+	}
+}
+///[-----------------------------------------------------------------------------------------]
+
+//[Delete From A List Of Data (GEt from Sended StudentName)]
+if(isset($_GET['passedName'])){
+	$studName = $_GET['passedName'];
+	$sql = "DELETE FROM tblUser Where StudentName='$studName'";
+	mysqli_query($conn,$sql);
+	header('Location:pageOne.php');
+}
+///[-----------------------------------------------------------------------------------------]
+
+
+
+///[----Edit Entry---------------------------------------------------------------------------]
+if(isset($_GET['editEntry'])){
+	$studName = $_GET['editEntry'];
+	$sql = "UPDATE tblUser SET StudentName='ThisisEdited' WHERE StudentName='$studName'";
+	mysqli_query($conn,$sql);
+	header('Location:pageOne.php');
+}
+///[-----------------------------------------------------------------------------------------]
 ?>
